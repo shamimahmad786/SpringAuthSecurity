@@ -1,0 +1,632 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<!-- <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>k</title> 
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    
+ -->
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+ <!-- <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+	integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />    -->
+	
+	
+	 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"   crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/all.min.css}">  
+  <link   rel="stylesheet" th:href="@{/css/font-awesome.css}">
+
+
+<style>
+@charset "ISO-8859-1";
+
+html, body {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	margin: 0px;
+}
+
+body {
+	min-height: 100vh;
+	background: #f9f9f9;
+}
+
+.space {
+	flex: 1;
+	min-height: 86vh;
+}
+
+.app-toolbar {
+	position: sticky;
+	position: -webkit-sticky;
+	/* For macOS/iOS Safari */
+	top: 0;
+	/* Sets the sticky toolbar to be on top */
+	z-index: 1000;
+	/* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+[class*=sidebar-dark-] {
+	background-color: #1d2746;
+}
+
+.logoDash {
+	font-size: 17px;
+	font-weight: 600;
+	font-family: sans-serif;
+	text-align: center;
+	padding: 15px;
+	height: 57px;
+	border-bottom: 1px solid black;
+}
+
+/* #sidebar {
+    position:absolute;
+    top:0px;
+    left:0px;
+    height:100%;
+    transition:all 300ms linear;
+  }
+#sidebar.active {
+    left:-250px;
+  } 
+#sidebar .toggle-btn {
+    position:absolute; 
+    top:10px;
+  }
+  
+  /* #sidebar .toggle-btn span {
+    display:block;
+    width:30px;
+    height:5px;
+    background:#151719;
+    margin:5px 0px;
+    cursor:pointer;
+  } 
+  #sidebar div.list div.item {
+    padding:15px 10px;
+    border-bottom:1px solid #444;
+    color:#fcfcfc;
+    text-transform:uppercase;
+    font-size:12px;
+  }
+   */
+
+/* p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+} */
+a, a:hover, a:focus {
+	color: inherit;
+	text-decoration: none;
+	transition: all 0.3s;
+}
+
+.navbar {
+	padding: 15px 10px;
+	background: #fff;
+	border: none;
+	border-radius: 0;
+	margin-bottom: 40px;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+	box-shadow: none;
+	outline: none !important;
+	border: none;
+}
+
+.line {
+	width: 100%;
+	height: 1px;
+	border-bottom: 1px dashed #ddd;
+	margin: 40px 0;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+.wrapper {
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+	perspective: 1500px;
+}
+
+#sidebar {
+	min-width: 250px;
+	max-width: 250px;
+	background: #1d2746;
+	color: #fff;
+	transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+	transform-origin: bottom left;
+}
+
+#sidebar.active {
+	margin-left: -250px;
+	transform: rotateY(100deg);
+}
+
+#sidebar .sidebar-header {
+	padding: 20px 15px 8px;
+	background: #10b3d6;
+}
+
+.footer-Back {
+	background: #fff;
+	box-shadow: 0px -3px 4px 0px rgb(137 137 137 / 27%);
+}
+
+.font32 {
+	font-size: 32px;
+	font-weight: 800;
+	letter-spacing: 2px;
+	background: #1d2746;
+	margin: 0px;
+	padding: 16px 15px;
+	border-bottom: 2px  solid #444c62;
+}
+
+#sidebar ul.components {
+	padding: 20px 0;
+	/* border-bottom: 1px solid #47748b; */
+}
+
+#sidebar ul p {
+	color: #fff;
+	padding: 10px;
+}
+
+#sidebar ul li a {
+	padding: 8px;
+	font-size: 1.1em;
+	display: block;
+	font-family: sans-serif;
+	color:#fff;
+}
+#sidebar ul li {
+	border-bottom:1px solid #444c62;
+}
+#sidebar ul li form {
+	margin:0;
+	padding:0;
+}
+
+#sidebar ul li a:hover {
+	color: #ade5ff;
+	cursor:pointer;
+}
+
+#sidebar ul li.active>a, a[aria-expanded="true"] {
+	color: #fff;
+	background: #1d2746;
+}
+
+a[data-toggle="collapse"] {
+	position: relative;
+}
+
+.dropdown-toggle::after {
+	display: block;
+	position: absolute;
+	top: 50%;
+	right: 20px;
+	transform: translateY(-50%);
+}
+
+ul ul a {
+	font-size: 0.9em !important;
+	padding-left: 30px !important;
+	background: #1d2746;
+}
+
+ul.CTAs {
+	padding: 20px;
+}
+
+ul.CTAs a {
+	text-align: center;
+	font-size: 0.9em !important;
+	display: block;
+	border-radius: 5px;
+	margin-bottom: 5px;
+}
+
+a.download {
+	background: #fff;
+	color: #1d2746;
+}
+
+a.article, a.article:hover {
+	background: #1d2746 !important;
+	color: #fff !important;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+#content {
+	width: 100%;
+	padding: 0px;
+	min-height: 100vh;
+	transition: all 0.3s;
+}
+
+.bg-light {
+	background-color: #fff !important;
+	box-shadow: 0px 2px 5px rgb(137 137 137 / 27%);
+}
+
+#sidebarCollapse {
+	width: 25px;
+	height: 25px;
+	background: #b9b9b9;
+	cursor: pointer;
+}
+
+#sidebarCollapse span {
+	width: 80%;
+	height: 2px;
+	margin: 0 auto;
+	display: block;
+	background: #fff;
+	transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+	transition-delay: 0.2s;
+}
+
+#sidebarCollapse span:first-of-type {
+	transform: rotate(45deg) translate(2px, 2px);
+}
+
+#sidebarCollapse span:nth-of-type(2) {
+	opacity: 0;
+}
+
+#sidebarCollapse span:last-of-type {
+	transform: rotate(-45deg) translate(1px, -1px);
+}
+
+#sidebarCollapse.active span {
+	transform: none;
+	opacity: 1;
+	margin: 5px auto;
+}
+
+/* ================================================ */
+.font15 {
+	font-size: 16px;
+	font-weight: 500;
+	font-family: sans-serif;
+	letter-spacing: 1px;
+}
+
+.box {
+	/* border: 1px solid silver; */
+	box-shadow: 1px 0px 2px rgb(0 0 0/ 50%);
+	padding: 5px 15px;
+	border-radius: 5px;
+	background: silver;
+	background-image: linear-gradient(rgba(83, 232, 251, 0.8),
+		rgba(0, 134, 199, 0.8)), url(images/btm-bg.png);
+	background-size: content;
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	position: relative;
+}
+
+
+.box1 {
+	/* border: 1px solid silver; */
+	box-shadow: 1px 0px 2px rgb(0 0 0/ 50%);
+	padding: 15px;
+	border-radius: 5px;
+	background: silver;
+	background-image: linear-gradient(rgba(245, 190, 25, 0.8),
+		rgba(245, 190, 25, 0.8)), url(images/top-bg.png);
+	background-size: content;
+	background-repeat: no-repeat;
+	background-position: right top;
+	position: relative;
+}
+
+.box2 {
+	/* border: 1px solid silver; */
+	box-shadow: 1px 0px 2px rgb(0 0 0/ 50%);
+	padding: 15px;
+	border-radius: 5px;
+	background: silver;
+	background-image: linear-gradient(rgba(155, 81, 246, 0.8),
+		rgba(155, 81, 246, 0.8)), url(images/btm-bg.png);
+	background-size: content;
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	position: relative;
+}
+
+.box3 {
+	/* border: 1px solid silver; */
+	box-shadow: 1px 0px 2px rgb(0 0 0/ 50%);
+	padding: 15px;
+	border-radius: 5px;
+	background: silver;
+	background-image: linear-gradient(rgba(86, 251, 190, 0.8),
+		rgba(86, 251, 190, 0.8)), url(images/btm-bg.png);
+	background-size: content;
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	position: relative;
+}
+
+.btn-link {
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+}
+.btn-link:hover {
+    color: #d2e5fa;
+    text-decoration: none;
+}
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media ( max-width : 768px) {
+	#sidebar {
+		margin-left: -250px;
+		transform: rotateY(90deg);
+	}
+	#sidebar.active {
+		margin-left: 0;
+		transform: none;
+	}
+	#sidebarCollapse span:first-of-type, #sidebarCollapse span:nth-of-type(2),
+		#sidebarCollapse span:last-of-type {
+		transform: none;
+		opacity: 1;
+		margin: 5px auto;
+	}
+	#sidebarCollapse.active span {
+		margin: 0 auto;
+	}
+	#sidebarCollapse.active span:first-of-type {
+		transform: rotate(45deg) translate(2px, 2px);
+	}
+	#sidebarCollapse.active span:nth-of-type(2) {
+		opacity: 0;
+	}
+	#sidebarCollapse.active span:last-of-type {
+		transform: rotate(-45deg) translate(1px, -1px);
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+	<!-- <p>Login in Authentication Server</p>
+ <a href="http://10.25.26.251:8385/meauth/oauth/authorize?response_type=code&user_oauth_approval=true&client_id=pgi&redirect_uri=http://10.25.26.251:4200&scopes=read" target="_blank" style="text-decoration: revert;">PGI</a>
+ <a href="http://10.25.26.251:8385/meauth/oauth/authorize?response_type=code&user_oauth_approval=true&client_id=fis&redirect_uri=http://10.25.26.251:80/home/registration&scopes=read" target="_blank" style="text-decoration: revert;">FIS</a>
+   
+   <form #form action='https://demopgi.udiseplus.gov.in/SpringAuthSecurity/logout' method='post'>
+
+                                        <button type="submit" class="btn btn-success" (click)="form.submit()">logout</button>
+
+                                    </form>
+      -->
+
+
+
+	<div class="wrapper">
+		<nav id="sidebar" [ngClass]="{ 'active': navbarOpen }">
+			<div>
+				<h3 class="font32">Auth Server</h3>
+			</div>
+
+			<ul class="list-unstyled components">
+				
+				<li class="nav-item">
+
+   			   <form #form action='http://10.25.26.251:8385/meauth/logout?returnTo=http://10.25.26.251:8385/meauth'
+  						method='post'> 
+  						
+<!--   						 <form #form action='https://pgi.udiseplus.gov.in/SpringAuthSecurity/logout?returnTo=https://pgi.udiseplus.gov.in/SpringAuthSecurity' -->
+<!--   						method='post'>  -->
+  						
+<!-- <form #form action='https://kvsonlinetransfer.kvs.gov.in/SpringAuthSecurity/logout?returnTo=https://kvsonlinetransfer.kvs.gov.in/SpringAuthSecurity' -->
+<!--    							method='post'>  -->
+
+							<button class="btn btn-link" title="" type="submit" (click)="form.submit()"><img th:src="@{images/log-out.png}"   alt="user Image" width="20px" class="mt-0"> Logout</button>
+							<!-- <button type="submit" class="btn btn-success"
+								(click)="form.submit()">logout</button> -->
+
+						<!-- </form>  -->
+						
+						<!-- 	<a type="submit" class="nav-link" (click)="form.submit()"> <i
+							class="fas fa-sign-out-alt mr-2"></i> Logout   -->
+						</a>
+					</form>
+
+				</li>
+
+				<li class="nav-item"><a [routerLink]="['/admin']"
+					class="nav-link"> <i class="nav-icon fas fa-home mr-2"
+						aria-hidden="true"></i> Home
+				</a></li>		
+				
+			</ul>
+		</nav>
+
+
+		<div id="content">
+			<div class="space">
+
+
+				<div class="clearfix py-2 px-2 navbar-light bg-light">
+					<div class="float-left">
+						<button type="button" id="sidebarCollapse"
+							(click)="toggleNavbar()" class="navbar-btn">
+							<span></span> <span></span> <span></span>
+						</button>
+
+					</div>
+					<div class="float-right">
+						<span>Hi </span> <span class="font15" th:text=${username}></span> <img
+							th:src="@{images/user.jpg}" alt="user Image" width="40px"
+							class="mt-0">
+					</div>
+				</div>
+				<div class="px-3">
+					<!--     <router-outlet></router-outlet>  -->
+				</div>
+
+				<div class="container-fluid">
+					<div class="row mt-3">
+						<div class="col-md-3" th:each="relatedWord: ${clients}">
+							<div class="box my-3">
+								<div class="media">
+								<a th:href="@{'/oauth/authorize?response_type=code&user_oauth_approval=true&client_id=' + ${relatedWord.clientId}} + '&redirect_uri=' + ${relatedWord.redirectUrl} + '&scopes=read' " target="_blank" class="text-white font-weight-bold align-self-center" th:text="${relatedWord.clientName}"></a>
+                            <!--  <h1  class="text-white font-weight-bold align-self-center" th:text="${relatedWord.clientName}">UDISE+</h1>  -->
+									<div class="media-body text-right">
+									<!-- 	<h5 class="text-white mb-0">Total </h5>
+										<h1 class="text-white font-weight-bold">256</h1>  -->
+									</div>
+								</div>
+							</div>
+						</div>
+                        
+                        
+                    <!--     		<table>
+            <tr th:each="relatedWord: ${clients}">
+                <p th:text="${relatedWord.clientName}"></p>
+            </tr>
+</table>  
+                        
+                        
+                        <div class="col-md-3">
+							<div class="box1 my-3">
+								<div class="media">
+                                    <h1  class="text-white font-weight-bold align-self-center">MIS</h1>
+									
+									<div class="media-body text-right">
+										<h5 class="text-white">Total </h5>
+										<h1 class="text-white font-weight-bold">256</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-md-3">
+							<div class="box2 my-3">
+								<div class="media">
+                                    <h1  class="text-white font-weight-bold align-self-center">PGI</h1>
+									
+									<div class="media-body text-right">
+										<h5 class="text-white">Total </h5>
+										<h1 class="text-white font-weight-bold">256</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-md-3">
+							<div class="box3 my-3">
+								<div class="media">
+                                    
+                                    <h1  class="text-white font-weight-bold align-self-center">FIS</h1>
+									
+									<div class="media-body text-right">
+										<h5 class="text-white">Total </h5>
+										<h1 class="text-white font-weight-bold">256</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						-->
+                          
+					</div>
+				</div>
+				
+		
+
+			</div>
+			<footer class="footer-Back  py-3 mt-5">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6 ">
+							<img th:src="@{images/nic-logo.png}" widt alt="" class="mt-0">
+							
+						</div>
+						<div class="col-md-4 offset-md-2">
+							<p class="text-dark mb-0">This site is designed, hosted,
+								developed and maintained by National Informatics Centre (NIC)</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+	</div>
+
+	<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+		crossorigin="anonymous"></script>  -->
+		
+		
+		
+		<script type="text/javascript" th:src="@{/js/slim.min.js}" ></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}" ></script>
+		
+		
+
+	<script type="text/javascript">
+	var message = "[[${clients}]]";
+    var name1 ='${username}' ;
+   console.log(message);
+ //   alert(JSON.parse(message))
+    
+    
+   
+     $.each(message, function( index, value ) {
+       alert( index + ": " + value );
+   });
+	
+	
+		$(document).ready(function() {
+			$('#sidebarCollapse').on('click', function() {
+				$('#sidebar').toggleClass('active');
+				$(this).toggleClass('active');
+			});
+		});
+	</script>
+</body>
